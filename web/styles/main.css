@@ -1,0 +1,9 @@
+body{
+    user-select: none;
+}
+#board {
+    margin: 0 auto;
+}
+#myCanvas {
+    border: 3px solid #000;       
+}
