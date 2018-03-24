@@ -2,7 +2,7 @@ $(document).ready(() => {
     console.log("THE DOC IS READY :)");
     drawing();
 });
-
+ 
 const drawing = () => {
     var myCanvas = document.getElementById("myCanvas");
     var ctx = myCanvas.getContext("2d");
