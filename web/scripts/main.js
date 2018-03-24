@@ -2,9 +2,9 @@ $(document).ready(() => {
     console.log("THE DOC IS READY :)");
     drawing();
 });
- 
+
 const drawing = () => {
-    var myCanvas = document.getElementById("myCanvas");
+    var myCanvas = document.getElementById("canvas");
     var ctx = myCanvas.getContext("2d");
     setProps(myCanvas, 800, 500);
     let dimensionProps = {left: myCanvas.offsetLeft, top: myCanvas.offsetTop};
@@ -14,26 +14,27 @@ const drawing = () => {
         ctx.lineWidth = 5;
         $(myCanvas).mousedown((e) => {
             mouseisDown = true;
+            cPosX = drawingPos(e.pageX, dimensionProps.left);
+            cPosY = drawingPos(e.pageY, dimensionProps.top);
             ctx.beginPath();
-            cPosX = e.pageX - dimensionProps.left;
-            cPosY = e.pageY - dimensionProps.top;
             ctx.moveTo(cPosX, cPosY);
         }).mousemove((e) => {
             if (mouseisDown != false) {
-                cPosX = e.pageX - dimensionProps.left;
-                cPosY = e.pageY - dimensionProps.top;
+                cPosX = drawingPos(e.pageX, dimensionProps.left);
+                cPosY = drawingPos(e.pageY, dimensionProps.top);
                 ctx.lineTo(cPosX, cPosY);
                 ctx.strokeStyle = "black";
                 ctx.stroke();
             }
         }).mouseup((e) => {
             mouseisDown = false;
-            ctx.closePath();
+            //ctx.closePath();
         });
     }
     clear(ctx, myCanvas);
 };
 
+//testing af es6 :)
 const setProps = (canvas, w, h) => {
     canvas.width = w;
     canvas.height = h;
@@ -43,4 +44,8 @@ const clear = (ctx, canvas) => {
     $("#clear-btn").click(() => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     });
+}
+
+const drawingPos = (pPos, dProps) => {
+    return ((pPos) - (dProps));
 }
