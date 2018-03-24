@@ -41,7 +41,7 @@ const setProps = (canvas, w, h) => {
     canvas.width = w;
     canvas.height = h;
 }
-
+ 
 const clear = (ctx, canvas) => {
     $("#clear-btn").click(() => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
