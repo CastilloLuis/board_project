@@ -3,11 +3,14 @@ $(document).ready(() => {
     drawing();
 });
 
-const drawing = () => {
+function drawing() {
     var myCanvas = document.getElementById("canvas");
     var ctx = myCanvas.getContext("2d");
     setProps(myCanvas, 800, 500);
-    let dimensionProps = {left: myCanvas.offsetLeft, top: myCanvas.offsetTop};
+    let dimensionProps = {
+        left: myCanvas.offsetLeft,
+        top: myCanvas.offsetTop
+    };
     if (myCanvas) {
         let mouseisDown = false;
         let cPosX, cPosY;
@@ -32,9 +35,8 @@ const drawing = () => {
         });
     }
     clear(ctx, myCanvas);
-};
+}
 
-//testing af es6 :)
 const setProps = (canvas, w, h) => {
     canvas.width = w;
     canvas.height = h;
@@ -46,6 +48,4 @@ const clear = (ctx, canvas) => {
     });
 }
 
-const drawingPos = (pPos, dProps) => {
-    return ((pPos) - (dProps));
-}
+const drawingPos = (pPos, dProps) => ((pPos) - (dProps));
