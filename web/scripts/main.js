@@ -1,37 +1,45 @@
 $(document).ready(() => {
     console.log("THE DOC IS READY :)");
     drawing();
+    connect();
 });
 
+var start = {};
+var draw = {};
+var close = {};
+var myCanvas;
+var ctx;
+var dimensionProps;
+
 function drawing() {
-    var myCanvas = document.getElementById("canvas");
-    var ctx = myCanvas.getContext("2d");
+    myCanvas = document.getElementById("canvas");
+    ctx = myCanvas.getContext("2d");
     setProps(myCanvas, 800, 500);
-    let dimensionProps = {
+    dimensionProps = {
         left: myCanvas.offsetLeft,
         top: myCanvas.offsetTop
     };
     if (myCanvas) {
         let mouseisDown = false;
-        let cPosX, cPosY;
+        var cPosX, cPosY;
         ctx.lineWidth = 5;
         $(myCanvas).mousedown((e) => {
             mouseisDown = true;
-            cPosX = drawingPos(e.pageX, dimensionProps.left);
-            cPosY = drawingPos(e.pageY, dimensionProps.top);
-            ctx.beginPath();
-            ctx.moveTo(cPosX, cPosY);
+            start.x = e.pageX;
+            start.y = e.pageY;
+            console.log("start"+JSON.stringify(start))
+            sendDraw(start);
+            //startDraw(start.x,start.y)
         }).mousemove((e) => {
-            if (mouseisDown != false) {
-                cPosX = drawingPos(e.pageX, dimensionProps.left);
-                cPosY = drawingPos(e.pageY, dimensionProps.top);
-                ctx.lineTo(cPosX, cPosY);
-                ctx.strokeStyle = "black";
-                ctx.stroke();
+            if (mouseisDown) {
+                draw.x = e.pageX;
+                draw.y = e.pageY;
+                console.log("drawing"+JSON.stringify(draw))
+                sendDraw(draw);
+                //drawingCanvas(draw.x,draw.y)
             }
         }).mouseup((e) => {
             mouseisDown = false;
-            //ctx.closePath();
         });
     }
     clear(ctx, myCanvas);
@@ -41,11 +49,12 @@ const setProps = (canvas, w, h) => {
     canvas.width = w;
     canvas.height = h;
 }
- 
+
 const clear = (ctx, canvas) => {
     $("#clear-btn").click(() => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     });
 }
 
+// cross-browser canvas coordinates
 const drawingPos = (pPos, dProps) => ((pPos) - (dProps));
