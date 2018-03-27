@@ -1,10 +1,42 @@
-body{
+body {
     user-select: none;
+    background-image: url("../images/bg.png");
+    background-size: cover;
 }
+
 #board {
     margin: 0 auto;
 }
+
 #canvas {
-    border: 3px solid #000;       
+    background-color: #277900;
+    border: 3px solid #000;
 }
- 
+
+/*PAGE DESIGN*/
+
+#color-picker {
+    text-align: center;
+}
+
+#title {
+    margin-top: 10%;
+    color: white;
+    font: bold 60px "Century Gothic";
+    text-shadow: 1px 1px #000000, 2px 2px #000000, 3px 3px #000000;
+    transition: all 0.2s;
+}
+
+#picker-title {
+    color: white;
+    font: bold 25px "Century Gothic";
+    text-shadow: 1px 1px #000000, 2px 2px #000000, 3px 3px #000000;
+}
+
+#clear-btn {
+    position: absolute;
+    width: 8%;
+    height: auto;
+    top: 100%;
+    margin-left: 80%;
+}

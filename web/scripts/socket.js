@@ -42,7 +42,7 @@
     const drawingCanvas = (x, y) => {
         cPosX = x - dimensionProps.left;
         cPosY = y - dimensionProps.top;     
-        ctx.lineTo(cPosX+10,cPosY+10);
+        ctx.lineTo(cPosX,cPosY);
         ctx.stroke();
     }
 

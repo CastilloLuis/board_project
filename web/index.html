@@ -6,23 +6,31 @@
 -->
 
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
     <title>Board Project</title>
     <!--CSS-->
     <link rel="stylesheet" href="styles/main.css">
 </head>
 
-<body>  
- 
+<body>
+    <h4 id="title" style="text-align: center;">SHARED BOARD</h4>
+    <img src="images/eraser.png" id="clear-btn" />
+
     <div id="board" align="center">
         <canvas id="canvas"></canvas>
         <br/>
         <br/>
-        <button id="clear-btn">CLEAR</button>
     </div>
 
-    <div id="canvas2">
-        
+    <div id="color-picker">
+        <p id="picker-title">PICK YOUR COLOR</p>
+        <select name="" id="">
+            <option value="">BLACK</option>
+            <option value="">WHITE</option>
+            <option value="">RED</option>
+            <option value="">PINK</option>
+            <option value="">YELLOW</option>
+        </select>
     </div>
 
     <!--SCRIPTS-->
