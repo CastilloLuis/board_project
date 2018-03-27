@@ -1,13 +1,12 @@
 $(document).ready(() => {
     console.log("THE DOC IS READY :)");
     drawing();
-    connect();
     clear();
 });
 
 var start = {};
 var draw = {};
-var close = {};
+var endpath = {};
 var myCanvas;
 var ctx;
 var dimensionProps;
@@ -33,20 +32,22 @@ function drawing() {
             start.state = "down";
             start.color = brushColor;
             console.log("start"+JSON.stringify(start))
-            sendDraw(start);
+            sendData(start);
         }).mousemove((e) => {
             if (mouseisDown) {
                 draw.x = e.pageX;
                 draw.y = e.pageY;
                 draw.state = "move";
                 console.log("drawing"+JSON.stringify(draw))
-                sendDraw(draw);
+                sendData(draw);
             }
         }).mouseup((e) => {
             mouseisDown = false;
+            endpath.state = "up";
+            sendData(endpath);
         });
     }
-    //clear();
+    clear();
 }
 
 const setProps = (canvas, w, h) => {
@@ -56,7 +57,7 @@ const setProps = (canvas, w, h) => {
 
 const clear = (ctx, canvas) => {
     $("#clear-btn").click(() => {
-        sendDraw({clear: true});
+        sendData({clear: true});
     });
 }
 
@@ -65,3 +66,9 @@ const drawingPos = (pPos, dProps) => ((pPos) - (dProps));
 
 // brush color
 const colorPicker = () => (brushColor = $("#colorPicker").val());
+
+// set username
+const setUsername = (modal, user) => {
+    modal.style.display = "none";
+    connect(user);
+}

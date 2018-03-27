@@ -10,12 +10,24 @@
     <title>Board Project</title>
     <!--CSS-->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/toastr.css">
 </head>
 
 <body>
     <h4 align="right" style="color: white; font-family: Helvetica;">LUIS CASTILLO</h4>
     <h4 id="title" style="text-align: center;">SHARED BOARD</h4>
     <img src="images/eraser.png" id="clear-btn" />
+
+    <!--USERS LIST-->
+    <div id="users-list" style="position: absolute; text-align: center;" align="left">
+        <h3 style="font-family: Century Gothic; color: white; margin-left: 20px;">
+            USERS CONNECTED
+        </h3>
+        <div id="list-div">
+
+        </div>
+    </div>
+    <!--// USERS LIST -->
 
     <div id="board" align="center">
         <canvas id="canvas"></canvas>
@@ -34,10 +46,29 @@
         </select>
     </div>
 
+    <button onclick="closeWs()" id="disconnect-btn">DISCONNECT</button>
+    <br/><br/>
+
+    <!--USER MODAL-->
+    <div class="modal" id="mymodal">
+        <div class="mymodal-content">
+            <span id="close">&times;</span>
+            <div style="text-align: center">
+                <h3 align="center">SET YOUR USERNAME</h3>
+                @ <input type="text" id="username" placeholder="username">
+                <br/><br/>
+                <button id="connect-btn">CONNECT AND DRAW!</button>
+                <br/><br/>
+            </div>
+        </div>
+    </div>
+
     <!--SCRIPTS-->
     <script src="scripts/jquery.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/socket.js"></script>
+    <script src="scripts/modal.js"></script>
+    <script src="scripts/toastr.js"></script>
 </body>
 
 </html>

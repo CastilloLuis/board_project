@@ -2,6 +2,7 @@ body {
     user-select: none;
     background-image: url("../images/bg.png");
     background-size: cover;
+    font-family: Helvetica;
 }
 
 #board {
@@ -39,4 +40,100 @@ body {
     height: auto;
     top: 100%;
     margin-left: 80%;
+}
+
+#disconnect-btn {
+    background-color: red;
+    color: white;
+    font-family: Helvetica;
+    padding: 10px 10px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    letter-spacing: 2px;
+    margin-left: 15%;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#disconnect-btn:hover {background-color: #ff2b2b}
+
+#disconnect-btn:active {
+  background-color: #ff2b2b;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+/* MYMODAL w3*/
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    border-radius: 10px;
+    font-family: Helvetica;
+}
+
+/* Modal Content/Box */
+
+.mymodal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*FIRST MODAL*/
+
+#username {
+    font-size: 20px;
+    border-radius: 5px;
+    outline: none;
+}
+
+#connect-btn {
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: lightgreen;
+    font-size: 20px;
+    padding: 6px 6px;
+    border-radius: 2px;
+    transition: ease-in-out 0.2s;
+    outline: none;
+}
+
+#connect-btn:hover {
+    border-radius: 15px;
 }

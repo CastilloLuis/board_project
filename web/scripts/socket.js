@@ -1,24 +1,28 @@
     var ws;
 
-    const sendDraw = (coord) => ws.send(JSON.stringify(coord));
+    const sendData = (data) => ws.send(JSON.stringify(data));
 
-    const close = () => ws.close;
+    const closeWs = () => ws.close();
 
-    function connect() {
-        ws = new WebSocket("ws://" + location.host + "/Board_Project/chatsv");
+    function connect(username) {
+        ws = new WebSocket("ws://" + location.host + "/Board_Project/chatsv/" + username);
 
         ws.onmessage = (e) => {
-            var mydraw = JSON.parse(e.data);
-            console.log("this is what i received " + JSON.stringify(mydraw));
-            //startDraw(mydraw.x,mydraw.y);
-           // drawingCanvas(mydraw.x, mydraw.y);
-            if (mydraw.state == "move") {
-                drawingCanvas(mydraw.x, mydraw.y);
+            var data = JSON.parse(e.data);
+            console.log("this is what i received " + JSON.stringify(data));
+            console.log("DATA SI SE DESCONECTO: " + data.hasconnected);
+            if (data.popup) connectedUser(data);
+            if (data.isjson) usersList(data);
+            if (data.clear) clearDraw();
+            // TO START DRAWING
+            if (data.state == "move") {
+                drawingCanvas(data.x, data.y);
+            } else if (data.state == "down") {
+                startDraw(data.x, data.y, data.color);
             } else {
-                startDraw(mydraw.x, mydraw.y, mydraw.color);
+                endDraw();
             }
-            //endDraw();
-        }   
+        }
 
         ws.onopen = (e) => {
             console.log("SUCCESSFULLY CONNECTION");
@@ -27,6 +31,7 @@
         ws.onclose = (e) => {
             if (ws.readyState === WebSocket.OPEN) {
                 console.log("THE CONNECTION HAS FINISHED");
+                ws.close();
             }
         }
 
@@ -35,13 +40,35 @@
         }
     }
 
+    // DATA HANDLER
+    const usersList = (data) => {
+        var listdiv = document.getElementById("list-div");
+        delete data["popup"];
+        delete data["isjson"];
+        delete data["username"];
+        delete data["hasconnected"];
+        listdiv.innerHTML = "";
+        for (let params in data) {
+            listdiv.innerHTML += `<p style='color: white; font-family: Arial;'> ✔️@ ${data[params]}</p>`;
+        }
+    }
+
+    const connectedUser = (data) => {
+        console.log("se conecto o no" + data.hasconnected);
+        if (data.hasconnected) {
+            toastr["success"](`@${data.username} is now available`);
+        } else {
+            toastr["error"](`@${data.username} left the room`);
+        }
+    }
+
+    // CANVAS
     const startDraw = (x, y, color) => {
         ctx.beginPath();
         ctx.strokeStyle = color;
         cPosX = x - dimensionProps.left;
         cPosY = y - dimensionProps.top;
-        //ctx.moveTo(x,y); //it works
-        ctx.moveTo(cPosX,cPosY);
+        ctx.moveTo(cPosX, cPosY);
     }
 
     const drawingCanvas = (x, y) => {
